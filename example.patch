@@ -1,0 +1,40 @@
+diff -cprN orig/incl/pdi1port.h patch/incl/pdi1port.h
+*** orig/incl/pdi1port.h	2016-03-22 15:02:55.777297200 +0800
+--- patch/incl/pdi1port.h	2016-08-02 11:30:34.902411100 +0800
+*************** extern void	PCLSendOutOfMemory(void);
+*** 570,576 ****
+  /* This form of the directory name is for Sun-based build.
+   * It should be changed to something like: "\\pcl\\macros\\" at porting time. */
+  #define MACRO_DIRECTORY_PATH "/pcl/macros/"
+! 
+  
+  /* PCL6 looks for mass storage based user-defined streams ONLY in this
+   * directory. */
+--- 570,576 ----
+  /* This form of the directory name is for Sun-based build.
+   * It should be changed to something like: "\\pcl\\macros\\" at porting time. */
+  #define MACRO_DIRECTORY_PATH "/pcl/macros/"
+! #define MACRO_PATH	         "macros/"
+  
+  /* PCL6 looks for mass storage based user-defined streams ONLY in this
+   * directory. */
+diff -cprN orig/pdi1/pdi1file.c patch/pdi1/pdi1file.c
+*** orig/pdi1/pdi1file.c	2016-03-22 15:51:45.019791000 +0800
+--- patch/pdi1/pdi1file.c	2016-08-04 15:25:08.344959200 +0800
+*************** FILE *PDI1openAssociateInfo(DEVICE dev, 
+*** 319,325 ****
+  	return NULL;
+      }
+      strcat(fullname, "/");
+!     strcat(fullname, MACRO_DIRECTORY_PATH);
+  
+      if (strlen(fullname) + strlen(filename) + 1 > FS_MAX_FILE_NAME_LEN) {
+  	return NULL;
+--- 319,325 ----
+  	return NULL;
+      }
+      strcat(fullname, "/");
+!     strcat(fullname, MACRO_PATH);
+  
+      if (strlen(fullname) + strlen(filename) + 1 > FS_MAX_FILE_NAME_LEN) {
+  	return NULL;
